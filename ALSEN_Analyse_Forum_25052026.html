@@ -33,7 +33,7 @@ html { overflow-x: hidden; scroll-behavior: smooth; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   overflow-x: hidden;
-  background: var(--bg);
+  background: #0a0a14;
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
@@ -300,7 +300,17 @@ footer strong { color:var(--text); }
 </style>
 </head>
 <body>
-<div style="position:fixed;bottom:8px;right:12px;background:rgba(192,132,252,.25);color:#d8b4fe;font-size:10px;padding:3px 8px;border-radius:4px;font-family:monospace;z-index:9999">v25/05/2026 — 17h19 — build final</div>
+<div id="lvclock" style="position:fixed;bottom:8px;right:12px;background:rgba(192,132,252,.25);color:#d8b4fe;font-size:10px;padding:3px 8px;border-radius:4px;font-family:monospace;z-index:9999">⏱ --:--</div>
+<script>
+(function(){
+  function fmt(n){return String(n).padStart(2,'0');}
+  function tick(){
+    var d=new Date();
+    document.getElementById('lvclock').textContent='⏱ '+fmt(d.getHours())+'h'+fmt(d.getMinutes())+' — 25/05/2026';
+  }
+  tick(); setInterval(tick,10000);
+})();
+</script>
 <div class="wrap">
 
 <!-- ═══ HERO ═══ -->
