@@ -134,13 +134,14 @@ body {
 }
 
 /* ─── TABLES ─── */
-.tbl { width:100%; border-collapse:collapse; font-size:13px; }
+.tbl { width:100%; border-collapse:collapse; font-size:13px; table-layout:fixed; }
 .tbl th {
   background:var(--surface2); color:var(--accent2);
   padding:10px 12px; text-align:left;
   font-size:11px; letter-spacing:.07em; text-transform:uppercase; font-weight:600;
+  word-break:keep-all;
 }
-.tbl td { padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:middle; }
+.tbl td { padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:top; overflow-wrap:break-word; word-break:break-word; }
 .tbl tr:last-child td { border-bottom:none; }
 .tbl tr:nth-child(even) td { background:rgba(14,11,26,.5); }
 .tbl tr.hi td { background:rgba(192,132,252,.08); }
@@ -204,7 +205,7 @@ body {
 .tld-neg { background:rgba(244,63,94,.13); color:var(--red); }
 .tld-ok  { background:rgba(56,189,248,.12); color:var(--blue); }
 .tl-date { font-size:12px; color:var(--muted); display:block; margin-top:3px; }
-.tl-desc { font-size:13.5px; color:var(--text); margin-top:3px; }
+.tl-desc { font-size:13px; color:var(--text); margin-top:3px; line-height:1.6; word-break:break-word; overflow-wrap:break-word; }
 
 /* ─── SCÉNARIOS ─── */
 .scen-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
@@ -379,7 +380,8 @@ footer strong { color:var(--text); }
 <!-- ═══ CHECKLIST PRÉ-ANALYSE ═══ -->
 <div class="section">
   <h2 class="section-title"><span>✅</span> Checklist pré-analyse — 7 points de vigilance</h2>
-  <table class="tbl">
+  <table class="tbl" style="table-layout:fixed;">
+    <colgroup><col style="width:5%"><col style="width:22%"><col style="width:52%"><col style="width:21%"></colgroup>
     <thead><tr><th>#</th><th>Question</th><th>Réponse</th><th>Statut</th></tr></thead>
     <tbody>
       <tr>
@@ -551,16 +553,24 @@ footer strong { color:var(--text); }
 <div class="section">
   <h2 class="section-title"><span>⚖️</span> Comparaison sectorielle — Biotechs thérapie génique EU</h2>
   <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px;">Comparaison sur capitalisation / trésorerie / stade pipeline — P/S et P/E non pertinents (zéro revenu commercial)</p>
-  <table class="tbl">
-    <thead><tr><th>Société</th><th>Ticker</th><th>Cap. (M€)</th><th>Tréso (M€)</th><th>Stade lead</th><th>Note</th></tr></thead>
+  <table class="tbl" style="table-layout:fixed;">
+    <colgroup>
+      <col style="width:18%">
+      <col style="width:10%">
+      <col style="width:10%">
+      <col style="width:10%">
+      <col style="width:18%">
+      <col style="width:34%">
+    </colgroup>
+    <thead><tr><th>Société</th><th>Ticker</th><th>Cap.</th><th>Tréso</th><th>Stade lead</th><th>Note</th></tr></thead>
     <tbody>
       <tr>
         <td>GenSight Biologics</td>
         <td>SIGHT.PA</td>
         <td>~40M€</td>
         <td>~15M€</td>
-        <td>Phase 3 (LHON · approbation EMA en attente)</td>
-        <td>Thérapie génique maladies rares, stade plus avancé sur LHON mais tréso inférieure</td>
+        <td>Phase 3 (LHON)</td>
+        <td>GT maladies rares, stade plus avancé, tréso inférieure</td>
       </tr>
       <tr>
         <td>Lysogène</td>
@@ -568,7 +578,7 @@ footer strong { color:var(--text); }
         <td>~30M€</td>
         <td>~5M€</td>
         <td>Phase 2/3 (MPS IIIA)</td>
-        <td>Thérapie génique neurologique pédiatrique, même profil mais tréso bien inférieure</td>
+        <td>GT neurologique pédiatrique, tréso bien inférieure</td>
       </tr>
       <tr>
         <td>Pharnext</td>
@@ -576,15 +586,15 @@ footer strong { color:var(--text); }
         <td>~20M€</td>
         <td>&lt;3M€</td>
         <td>Phase 3 (CMT)</td>
-        <td>Maladies rares neurologiques, tréso précaire, dilution historique forte</td>
+        <td>Maladies rares, tréso précaire, dilution historique forte</td>
       </tr>
       <tr class="hi">
         <td><strong>Sensorion</strong></td>
         <td><strong>ALSEN</strong></td>
         <td><strong>~209M€</strong></td>
         <td><strong>~57M€</strong></td>
-        <td><strong>Phase 1/2 (SENS-501) + IND (SENS-601)</strong></td>
-        <td style="color:var(--yellow)"><strong>Prime de valorisation vs pairs — justifiée par la tréso solide, Sanofi au capital et le marché de l'audition (>450M personnes touchées). Risque : stade encore précoce et concurrence Regeneron.</strong></td>
+        <td><strong>Ph.1/2 SENS-501 + IND SENS-601</strong></td>
+        <td style="color:var(--yellow)"><strong>Prime justifiée : tréso solide, Sanofi, Institut Pasteur, GJB2 = ~50% surdités. Risque : stade précoce + concurrence Regeneron.</strong></td>
       </tr>
     </tbody>
   </table>
@@ -868,7 +878,8 @@ footer strong { color:var(--text); }
 <!-- ═══ RISQUES ═══ -->
 <div class="section">
   <h2 class="section-title"><span>⚠️</span> Risques & Points de vigilance</h2>
-  <table class="tbl">
+  <table class="tbl" style="table-layout:fixed;">
+    <colgroup><col style="width:26%"><col style="width:16%"><col style="width:58%"></colgroup>
     <thead><tr><th>Risque</th><th>Niveau</th><th>Commentaire</th></tr></thead>
     <tbody>
       <tr>
