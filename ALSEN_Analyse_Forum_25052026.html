@@ -29,21 +29,20 @@
   --ar:       rgba(244,63,94,.11);
   --ao:       rgba(251,146,60,.09);
 }
-html, body { overflow-x: hidden; width: 100%; }
+html { overflow-x: hidden; scroll-behavior: smooth; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
+  overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   line-height: 1.65;
 }
-.wrap { box-sizing:border-box;
-  width: 100%;
+.wrap {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 20px 60px;
-  overflow: hidden;
 }
 
 /* ─── HERO ─── */
@@ -128,7 +127,6 @@ body {
 .section {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 14px; padding: 28px 28px 24px; margin-bottom: 20px;
-  width: 100%; overflow: hidden;
 }
 .section-title {
   font-size:16px; font-weight:700; color:var(--heading);
@@ -358,7 +356,7 @@ footer strong { color:var(--text); }
 <!-- ═══ RÉGIME MARCHÉ ═══ -->
 <div class="section">
   <h2 class="section-title"><span>🌡️</span> Régime de marché — 25/05/2026</h2>
-  <div style="overflow-x:auto;width:100%;"><table class="reg-tbl" style="table-layout:fixed;"><colgroup><col style="width:18%"><col style="width:16%"><col style="width:66%"></colgroup>
+  <table class="reg-tbl" style="table-layout:fixed;"><colgroup><col style="width:18%"><col style="width:16%"><col style="width:66%"></colgroup>
     <thead><tr><th>Indice / Secteur</th><th>Régime</th><th>Impact ALSEN</th></tr></thead>
     <tbody>
       <tr>
@@ -377,7 +375,7 @@ footer strong { color:var(--text); }
         <td>Plusieurs approbations de thérapies géniques en 2025-2026 (Casgevy, Zynteglo) → changement de paradigme réglementaire. Sensorion dans un secteur en pleine légitimation.</td>
       </tr>
     </tbody>
-  </table></div>
+  </table>
   <div style="margin-top:14px;font-size:12.5px;color:var(--muted);padding:10px 14px;background:var(--surface2);border-radius:8px;">
     💡 <strong style="color:var(--text);">Bêta élevé</strong> — ALSEN est une nano cap de spéculation pure. La volatilité intrinsèque (pipeline binaire) domine largement le signal macro. Un contexte risk-on est nécessaire mais insuffisant — les catalyseurs endogènes (données cliniques) sont les vrais déclencheurs.
   </div>
@@ -387,7 +385,7 @@ footer strong { color:var(--text); }
 <!-- ═══ CHECKLIST PRÉ-ANALYSE ═══ -->
 <div class="section">
   <h2 class="section-title"><span>✅</span> Checklist pré-analyse — 7 points de vigilance</h2>
-  <div style="overflow-x:auto;width:100%;"><table class="tbl" style="table-layout:fixed;">
+  <table class="tbl" style="table-layout:fixed;">
     <colgroup><col style="width:5%"><col style="width:22%"><col style="width:52%"><col style="width:21%"></colgroup>
     <thead><tr><th>#</th><th>Question</th><th>Réponse</th><th>Statut</th></tr></thead>
     <tbody>
@@ -434,7 +432,7 @@ footer strong { color:var(--text); }
         <td><span class="pill pill-y">S1 2027</span></td>
       </tr>
     </tbody>
-  </table></div>
+  </table>
 </div>
 
 
@@ -524,7 +522,7 @@ footer strong { color:var(--text); }
   <p style="font-size:13.5px;margin-bottom:18px;color:var(--text);">
     Sensorion est une société de biotechnologie clinique fondée en 2009, pionnière dans le développement de thérapies géniques pour l'<strong style="color:var(--accent2);">oreille interne</strong>. Basée à Montpellier, elle est la seule biotech européenne cotée pure-play sur les maladies auditives génétiques. Son pipeline couvre la surdité congénitale pédiatrique, la presbyacousie progressive et la surdité acquise. En janvier 2026, Sanofi a investi 20 M€ — validation externe de premier ordre du potentiel de ses programmes de thérapie génique.
   </p>
-  <div style="overflow-x:auto;width:100%;"><table class="tbl">
+  <table class="tbl">
     <thead><tr><th>Candidat</th><th>Cible / Indication</th><th>Stade</th><th>Partenaire</th><th>Prochain jalon</th></tr></thead>
     <tbody>
       <tr>
@@ -549,7 +547,7 @@ footer strong { color:var(--text); }
         <td>Évaluation partenariat / prochaine étude</td>
       </tr>
     </tbody>
-  </table></div>
+  </table>
   <div style="margin-top:14px;font-size:12.5px;color:var(--muted);background:var(--surface2);border-radius:8px;padding:12px 16px;border-left:3px solid var(--accent);">
     ⚠️ <strong style="color:var(--text);">Compétition sur SENS-501</strong> : Regeneron a obtenu l'approbation FDA d'une thérapie génique OTOF en avril 2026 → Sensorion est désormais <em>challenger</em> sur le marché américain de la surdité OTOF. Avantage comparatif de Sensorion : différenciation scientifique (vecteur dual-AAV), données de tolérance confirmées, accès marché européen non encore disputé.
   </div>
@@ -560,7 +558,7 @@ footer strong { color:var(--text); }
 <div class="section">
   <h2 class="section-title"><span>⚖️</span> Comparaison sectorielle — Biotechs thérapie génique EU</h2>
   <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px;">Comparaison sur capitalisation / trésorerie / stade pipeline — P/S et P/E non pertinents (zéro revenu commercial)</p>
-  <div style="overflow-x:auto;width:100%;"><table class="tbl" style="table-layout:fixed;">
+  <table class="tbl" style="table-layout:fixed;">
     <colgroup>
       <col style="width:18%">
       <col style="width:10%">
@@ -604,7 +602,7 @@ footer strong { color:var(--text); }
         <td style="color:var(--yellow)"><strong>Prime justifiée : tréso solide, Sanofi, Institut Pasteur, GJB2 = ~50% surdités. Risque : stade précoce + concurrence Regeneron.</strong></td>
       </tr>
     </tbody>
-  </table></div>
+  </table>
   <div class="hbox">
     <div class="hb-title">🔎 Position relative</div>
     Sensorion est valorisée 5-7× ses comparables cotés, une prime qui reflète la présence de Sanofi + le marché adressable immense de la surdité génétique (~50M € GJB2 seul). Cette prime est <strong style="color:var(--yellow);">conditionnelle aux données cliniques</strong> : un résultat décevant sur SENS-501 Q4 2026 ramènerait probablement la capitalisation en ligne avec ses pairs (~40-80M€), soit une décote de -60% à -80%.
@@ -763,7 +761,7 @@ footer strong { color:var(--text); }
   </div>
 
   <h3 style="font-size:14px;color:var(--accent2);margin:24px 0 14px;font-weight:600;">📉 Indicateurs — Synthèse</h3>
-  <div style="overflow-x:auto;width:100%;"><table class="tbl">
+  <table class="tbl">
     <thead><tr><th>Indicateur</th><th>Valeur</th><th>Lecture</th><th>Signal</th></tr></thead>
     <tbody>
       <tr>
@@ -797,14 +795,14 @@ footer strong { color:var(--text); }
         <td><span class="pill pill-a">Mixte</span></td>
       </tr>
     </tbody>
-  </table></div>
+  </table>
 </div>
 
 
 <!-- ═══ CONSENSUS ═══ -->
 <div class="section">
   <h2 class="section-title"><span>🔬</span> Consensus analystes</h2>
-  <div style="overflow-x:auto;width:100%;"><table class="tbl">
+  <table class="tbl">
     <thead><tr><th>Analyste</th><th>Maison</th><th>Recommandation</th><th>Objectif</th><th>Note</th></tr></thead>
     <tbody>
       <tr>
@@ -815,7 +813,7 @@ footer strong { color:var(--text); }
         <td>*Source image Boursorama — nom de l'analyste non disponible en sources gratuites · objectif sur 5 mois</td>
       </tr>
     </tbody>
-  </table></div>
+  </table>
   <div class="hbox">
     <div class="hb-title">📊 Dispersion consensus (source : Boursorama, image)</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;font-size:13px;">
@@ -885,7 +883,7 @@ footer strong { color:var(--text); }
 <!-- ═══ RISQUES ═══ -->
 <div class="section">
   <h2 class="section-title"><span>⚠️</span> Risques & Points de vigilance</h2>
-  <div style="overflow-x:auto;width:100%;"><table class="tbl" style="table-layout:fixed;">
+  <table class="tbl" style="table-layout:fixed;">
     <colgroup><col style="width:26%"><col style="width:16%"><col style="width:58%"></colgroup>
     <thead><tr><th>Risque</th><th>Niveau</th><th>Commentaire</th></tr></thead>
     <tbody>
@@ -920,7 +918,7 @@ footer strong { color:var(--text); }
         <td>Pas de clause going concern dans les comptes 2025, mais avec un runway S1 2027 et ~22M€ de burn annuel, la question se reposera dans les comptes S1 2026 (publication été 2026).</td>
       </tr>
     </tbody>
-  </table></div>
+  </table>
 </div>
 
 
