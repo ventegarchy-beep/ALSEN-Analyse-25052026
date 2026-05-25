@@ -29,7 +29,7 @@
   --ar:       rgba(244,63,94,.11);
   --ao:       rgba(251,146,60,.09);
 }
-html, body { overflow-x: hidden; }
+html, body { overflow-x: hidden; width: 100%; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   background: var(--bg);
@@ -38,7 +38,13 @@ body {
   font-size: 15px;
   line-height: 1.65;
 }
-.wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
+.wrap {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+  overflow: hidden;
+}
 
 /* ─── HERO ─── */
 .hero {
@@ -122,6 +128,7 @@ body {
 .section {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 14px; padding: 28px 28px 24px; margin-bottom: 20px;
+  width: 100%; overflow: hidden;
 }
 .section-title {
   font-size:16px; font-weight:700; color:var(--heading);
@@ -134,14 +141,14 @@ body {
 }
 
 /* ─── TABLES ─── */
-.tbl { width:100%; border-collapse:collapse; font-size:13px; table-layout:fixed; }
+.tbl { width:100%; max-width:100%; border-collapse:collapse; font-size:13px; table-layout:fixed; }
 .tbl th {
   background:var(--surface2); color:var(--accent2);
   padding:10px 12px; text-align:left;
   font-size:11px; letter-spacing:.07em; text-transform:uppercase; font-weight:600;
-  word-break:keep-all;
+  word-break:keep-all; overflow:hidden;
 }
-.tbl td { padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:top; overflow-wrap:break-word; word-break:break-word; }
+.tbl td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; overflow-wrap:break-word; word-break:break-word; min-width:0; overflow:hidden; }
 .tbl tr:last-child td { border-bottom:none; }
 .tbl tr:nth-child(even) td { background:rgba(14,11,26,.5); }
 .tbl tr.hi td { background:rgba(192,132,252,.08); }
@@ -157,9 +164,9 @@ body {
 .ks { font-size:11px; color:var(--muted); margin-top:3px; }
 
 /* ─── REGIME TABLE ─── */
-.reg-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+.reg-tbl { width:100%; max-width:100%; border-collapse:collapse; font-size:13px; table-layout:fixed; }
 .reg-tbl th { background:var(--surface2); color:var(--accent2); padding:10px 14px; text-align:left; font-weight:600; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; }
-.reg-tbl td { padding:11px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+.reg-tbl td { padding:11px 14px; border-bottom:1px solid var(--border); vertical-align:top; overflow-wrap:break-word; word-break:break-word; min-width:0; }
 .reg-tbl tr:last-child td { border-bottom:none; }
 .reg-tbl tr:nth-child(even) td { background:rgba(14,11,26,.5); }
 .tag-h { background:rgba(16,185,129,.14); color:var(--green); border-radius:4px; padding:2px 8px; font-size:11px; font-weight:600; }
@@ -194,7 +201,7 @@ body {
 .fibo-cur .fpr { color:var(--accent2); font-size:15px; font-weight:700; }
 
 /* ─── TIMELINE ─── */
-.tl { position:relative; padding-left:24px; }
+.tl { position:relative; padding-left:24px; width:100%; overflow:hidden; }
 .tl::before { content:''; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:linear-gradient(to bottom,var(--accent),transparent); }
 .tl-item { position:relative; padding:0 0 22px 18px; }
 .tl-item::before { content:''; position:absolute; left:-18px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--accent); border:2px solid var(--surface); }
@@ -269,14 +276,14 @@ footer { background:var(--surface); border:1px solid var(--border); border-radiu
 footer strong { color:var(--text); }
 
 /* ─── LIVRAISON ─── */
-.livraison { background:var(--surface2); border:1px solid rgba(192,132,252,.35); border-radius:12px; padding:20px 24px; font-family:monospace; margin-top:24px; }
+.livraison { background:var(--surface2); border:1px solid rgba(192,132,252,.35); border-radius:12px; padding:20px 24px; font-family:monospace; margin-top:24px; width:100%; overflow:hidden; }
 .lv-title { color:var(--accent2); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:18px; }
 .lv-block { margin-bottom:14px; }
 .lv-label { color:var(--muted); font-size:11px; margin-bottom:6px; }
-.lv-row { display:flex; align-items:center; gap:10px; }
-.lv-code { background:var(--surface); color:var(--heading); border:1px solid var(--border); border-radius:6px; padding:9px 14px; font-size:12.5px; flex:1; word-break:break-all; }
+.lv-row { display:flex; align-items:center; gap:10px; width:100%; min-width:0; }
+.lv-code { background:var(--surface); color:var(--heading); border:1px solid var(--border); border-radius:6px; padding:9px 14px; font-size:11.5px; flex:1; min-width:0; word-break:break-all; overflow-wrap:anywhere; overflow:hidden; }
 .lv-code.green { color:var(--green); }
-.lv-btn { display:flex; align-items:center; gap:5px; padding:9px 14px; border-radius:6px; white-space:nowrap; cursor:pointer; font-size:12px; border:none; font-weight:600; }
+.lv-btn { display:flex; align-items:center; gap:5px; padding:9px 14px; border-radius:6px; white-space:nowrap; cursor:pointer; font-size:12px; border:none; font-weight:600; flex-shrink:0; }
 .lv-btn.purple { background:var(--accent); color:#fff; }
 .lv-btn.greenbtn { background:var(--green); color:#fff; }
 
@@ -351,7 +358,7 @@ footer strong { color:var(--text); }
 <!-- ═══ RÉGIME MARCHÉ ═══ -->
 <div class="section">
   <h2 class="section-title"><span>🌡️</span> Régime de marché — 25/05/2026</h2>
-  <table class="reg-tbl">
+  <table class="reg-tbl" style="table-layout:fixed;"><colgroup><col style="width:18%"><col style="width:16%"><col style="width:66%"></colgroup>
     <thead><tr><th>Indice / Secteur</th><th>Régime</th><th>Impact ALSEN</th></tr></thead>
     <tbody>
       <tr>
