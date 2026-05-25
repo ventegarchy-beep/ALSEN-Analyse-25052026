@@ -38,7 +38,7 @@ body {
   font-size: 15px;
   line-height: 1.65;
 }
-.wrap {
+.wrap { box-sizing:border-box;
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
@@ -76,7 +76,7 @@ body {
 .hero-title { font-size: clamp(24px,4vw,34px); font-weight: 700; color: var(--heading); letter-spacing:-.02em; line-height:1.1; margin-bottom:8px; }
 .hero-title span { color: var(--accent2); }
 .hero-tagline { color: var(--muted); font-size:13.5px; margin-bottom:22px; }
-.hero-meta {
+.hero-meta { overflow:hidden;
   display: flex; flex-wrap: wrap; gap: 18px;
   font-size: 12.5px; color: var(--muted);
   margin-bottom: 24px; padding-bottom: 22px;
@@ -111,7 +111,7 @@ body {
 .disclaimer { font-size:11px; color:var(--muted); margin-top:18px; opacity:.65; }
 
 /* ─── ALERTES ─── */
-.alert {
+.alert { overflow:hidden; word-break:break-word;
   border-radius: 10px; padding: 14px 18px; margin-bottom: 10px;
   font-size: 13.5px; display: flex; gap: 10px; align-items: flex-start;
   border: 1px solid transparent;
@@ -156,7 +156,7 @@ body {
 
 /* ─── KPI GRID ─── */
 .kg { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:12px; }
-.kpi { background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; min-width:0; }
+.kpi { min-width:0; background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; min-width:0; }
 .kl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; margin-bottom:5px; }
 .kv { font-family:'DM Mono',monospace; font-size:20px; font-weight:700; color:var(--heading); line-height:1; }
 .kd { font-size:12px; margin-top:4px; }
@@ -203,7 +203,7 @@ body {
 /* ─── TIMELINE ─── */
 .tl { position:relative; padding-left:24px; width:100%; overflow:hidden; }
 .tl::before { content:''; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:linear-gradient(to bottom,var(--accent),transparent); }
-.tl-item { position:relative; padding:0 0 22px 18px; }
+.tl-item { position:relative; overflow:hidden; padding:0 0 22px 18px; }
 .tl-item::before { content:''; position:absolute; left:-18px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--accent); border:2px solid var(--surface); }
 .tld { display:inline-block; font-size:11px; font-weight:600; padding:2px 9px; border-radius:4px; margin-bottom:5px; }
 .tld-cat { background:rgba(192,132,252,.18); color:var(--accent2); }
@@ -225,7 +225,7 @@ body {
 .scen-p { font-family:'DM Mono',monospace; font-size:28px; font-weight:700; line-height:1; margin-bottom:10px; }
 .scen-p.bull { color:var(--green); } .scen-p.neu { color:var(--yellow); } .scen-p.bear { color:var(--red); }
 .scen-t { font-family:'DM Mono',monospace; font-size:14px; font-weight:600; color:var(--heading); margin-bottom:8px; }
-.scen-d { font-size:12px; color:var(--muted); line-height:1.55; }
+.scen-d { font-size:12px; word-break:break-word; overflow-wrap:break-word; color:var(--muted); line-height:1.55; }
 
 /* ─── SCORE ─── */
 .score-row { display:grid; grid-template-columns:160px 1fr auto; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
@@ -234,10 +234,10 @@ body {
 .score-bar-w { background:var(--surface2); border-radius:6px; height:8px; overflow:hidden; }
 .score-bar { height:100%; border-radius:6px; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
 .score-val { font-family:'DM Mono',monospace; font-size:14px; font-weight:700; color:var(--accent2); }
-.score-sub { font-size:11.5px; color:var(--muted); margin-top:3px; grid-column:1/-1; }
+.score-sub { font-size:11px; word-break:break-word; overflow-wrap:break-word; color:var(--muted); margin-top:3px; grid-column:1/-1; }
 
 /* ─── CONCLUSION ─── */
-.conclu {
+.conclu { overflow:hidden;
   background: linear-gradient(135deg,rgba(192,132,252,.06),rgba(192,132,252,.02));
   border: 1px solid rgba(192,132,252,.22);
   border-radius: 14px; padding: 28px;
@@ -260,7 +260,7 @@ body {
 .level-card.cat  .lc-val { color:var(--orange); font-size:14px; }
 
 /* ─── HIGHLIGHT BOX ─── */
-.hbox { background:rgba(192,132,252,.07); border:1px solid rgba(192,132,252,.18); border-radius:10px; padding:16px 18px; margin-top:14px; font-size:13px; }
+.hbox { overflow:hidden; word-break:break-word; background:rgba(192,132,252,.07); border:1px solid rgba(192,132,252,.18); border-radius:10px; padding:16px 18px; margin-top:14px; font-size:13px; }
 .hb-title { font-size:12px; font-weight:600; color:var(--accent2); text-transform:uppercase; letter-spacing:.07em; margin-bottom:8px; }
 
 /* ─── PILLS ─── */
@@ -272,7 +272,7 @@ body {
 .pill-b { background:rgba(56,189,248,.12); color:var(--blue); }
 
 /* ─── FOOTER ─── */
-footer { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:22px 24px; font-size:12px; color:var(--muted); line-height:1.6; margin-top:24px; }
+footer { overflow:hidden; word-break:break-word; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:22px 24px; font-size:12px; color:var(--muted); line-height:1.6; margin-top:24px; }
 footer strong { color:var(--text); }
 
 /* ─── LIVRAISON ─── */
@@ -296,7 +296,7 @@ footer strong { color:var(--text); }
   .score-row { grid-template-columns:1fr auto; }
 }
 @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
-.hero, .alert, .section, .conclu { animation: fadeIn .45s ease both; }
+.hero, .alert, .section, .conclu { overflow:hidden; animation: fadeIn .45s ease both; }
 .section:nth-child(2) { animation-delay:.05s; }
 .section:nth-child(3) { animation-delay:.10s; }
 </style>
@@ -358,7 +358,7 @@ footer strong { color:var(--text); }
 <!-- ═══ RÉGIME MARCHÉ ═══ -->
 <div class="section">
   <h2 class="section-title"><span>🌡️</span> Régime de marché — 25/05/2026</h2>
-  <table class="reg-tbl" style="table-layout:fixed;"><colgroup><col style="width:18%"><col style="width:16%"><col style="width:66%"></colgroup>
+  <div style="overflow-x:auto;width:100%;"><table class="reg-tbl" style="table-layout:fixed;"><colgroup><col style="width:18%"><col style="width:16%"><col style="width:66%"></colgroup>
     <thead><tr><th>Indice / Secteur</th><th>Régime</th><th>Impact ALSEN</th></tr></thead>
     <tbody>
       <tr>
@@ -377,7 +377,7 @@ footer strong { color:var(--text); }
         <td>Plusieurs approbations de thérapies géniques en 2025-2026 (Casgevy, Zynteglo) → changement de paradigme réglementaire. Sensorion dans un secteur en pleine légitimation.</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
   <div style="margin-top:14px;font-size:12.5px;color:var(--muted);padding:10px 14px;background:var(--surface2);border-radius:8px;">
     💡 <strong style="color:var(--text);">Bêta élevé</strong> — ALSEN est une nano cap de spéculation pure. La volatilité intrinsèque (pipeline binaire) domine largement le signal macro. Un contexte risk-on est nécessaire mais insuffisant — les catalyseurs endogènes (données cliniques) sont les vrais déclencheurs.
   </div>
@@ -387,7 +387,7 @@ footer strong { color:var(--text); }
 <!-- ═══ CHECKLIST PRÉ-ANALYSE ═══ -->
 <div class="section">
   <h2 class="section-title"><span>✅</span> Checklist pré-analyse — 7 points de vigilance</h2>
-  <table class="tbl" style="table-layout:fixed;">
+  <div style="overflow-x:auto;width:100%;"><table class="tbl" style="table-layout:fixed;">
     <colgroup><col style="width:5%"><col style="width:22%"><col style="width:52%"><col style="width:21%"></colgroup>
     <thead><tr><th>#</th><th>Question</th><th>Réponse</th><th>Statut</th></tr></thead>
     <tbody>
@@ -434,7 +434,7 @@ footer strong { color:var(--text); }
         <td><span class="pill pill-y">S1 2027</span></td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 </div>
 
 
@@ -524,7 +524,7 @@ footer strong { color:var(--text); }
   <p style="font-size:13.5px;margin-bottom:18px;color:var(--text);">
     Sensorion est une société de biotechnologie clinique fondée en 2009, pionnière dans le développement de thérapies géniques pour l'<strong style="color:var(--accent2);">oreille interne</strong>. Basée à Montpellier, elle est la seule biotech européenne cotée pure-play sur les maladies auditives génétiques. Son pipeline couvre la surdité congénitale pédiatrique, la presbyacousie progressive et la surdité acquise. En janvier 2026, Sanofi a investi 20 M€ — validation externe de premier ordre du potentiel de ses programmes de thérapie génique.
   </p>
-  <table class="tbl">
+  <div style="overflow-x:auto;width:100%;"><table class="tbl">
     <thead><tr><th>Candidat</th><th>Cible / Indication</th><th>Stade</th><th>Partenaire</th><th>Prochain jalon</th></tr></thead>
     <tbody>
       <tr>
@@ -549,7 +549,7 @@ footer strong { color:var(--text); }
         <td>Évaluation partenariat / prochaine étude</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
   <div style="margin-top:14px;font-size:12.5px;color:var(--muted);background:var(--surface2);border-radius:8px;padding:12px 16px;border-left:3px solid var(--accent);">
     ⚠️ <strong style="color:var(--text);">Compétition sur SENS-501</strong> : Regeneron a obtenu l'approbation FDA d'une thérapie génique OTOF en avril 2026 → Sensorion est désormais <em>challenger</em> sur le marché américain de la surdité OTOF. Avantage comparatif de Sensorion : différenciation scientifique (vecteur dual-AAV), données de tolérance confirmées, accès marché européen non encore disputé.
   </div>
@@ -560,7 +560,7 @@ footer strong { color:var(--text); }
 <div class="section">
   <h2 class="section-title"><span>⚖️</span> Comparaison sectorielle — Biotechs thérapie génique EU</h2>
   <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px;">Comparaison sur capitalisation / trésorerie / stade pipeline — P/S et P/E non pertinents (zéro revenu commercial)</p>
-  <table class="tbl" style="table-layout:fixed;">
+  <div style="overflow-x:auto;width:100%;"><table class="tbl" style="table-layout:fixed;">
     <colgroup>
       <col style="width:18%">
       <col style="width:10%">
@@ -604,7 +604,7 @@ footer strong { color:var(--text); }
         <td style="color:var(--yellow)"><strong>Prime justifiée : tréso solide, Sanofi, Institut Pasteur, GJB2 = ~50% surdités. Risque : stade précoce + concurrence Regeneron.</strong></td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
   <div class="hbox">
     <div class="hb-title">🔎 Position relative</div>
     Sensorion est valorisée 5-7× ses comparables cotés, une prime qui reflète la présence de Sanofi + le marché adressable immense de la surdité génétique (~50M € GJB2 seul). Cette prime est <strong style="color:var(--yellow);">conditionnelle aux données cliniques</strong> : un résultat décevant sur SENS-501 Q4 2026 ramènerait probablement la capitalisation en ligne avec ses pairs (~40-80M€), soit une décote de -60% à -80%.
@@ -763,7 +763,7 @@ footer strong { color:var(--text); }
   </div>
 
   <h3 style="font-size:14px;color:var(--accent2);margin:24px 0 14px;font-weight:600;">📉 Indicateurs — Synthèse</h3>
-  <table class="tbl">
+  <div style="overflow-x:auto;width:100%;"><table class="tbl">
     <thead><tr><th>Indicateur</th><th>Valeur</th><th>Lecture</th><th>Signal</th></tr></thead>
     <tbody>
       <tr>
@@ -797,14 +797,14 @@ footer strong { color:var(--text); }
         <td><span class="pill pill-a">Mixte</span></td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 </div>
 
 
 <!-- ═══ CONSENSUS ═══ -->
 <div class="section">
   <h2 class="section-title"><span>🔬</span> Consensus analystes</h2>
-  <table class="tbl">
+  <div style="overflow-x:auto;width:100%;"><table class="tbl">
     <thead><tr><th>Analyste</th><th>Maison</th><th>Recommandation</th><th>Objectif</th><th>Note</th></tr></thead>
     <tbody>
       <tr>
@@ -815,7 +815,7 @@ footer strong { color:var(--text); }
         <td>*Source image Boursorama — nom de l'analyste non disponible en sources gratuites · objectif sur 5 mois</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
   <div class="hbox">
     <div class="hb-title">📊 Dispersion consensus (source : Boursorama, image)</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;font-size:13px;">
@@ -885,7 +885,7 @@ footer strong { color:var(--text); }
 <!-- ═══ RISQUES ═══ -->
 <div class="section">
   <h2 class="section-title"><span>⚠️</span> Risques & Points de vigilance</h2>
-  <table class="tbl" style="table-layout:fixed;">
+  <div style="overflow-x:auto;width:100%;"><table class="tbl" style="table-layout:fixed;">
     <colgroup><col style="width:26%"><col style="width:16%"><col style="width:58%"></colgroup>
     <thead><tr><th>Risque</th><th>Niveau</th><th>Commentaire</th></tr></thead>
     <tbody>
@@ -920,7 +920,7 @@ footer strong { color:var(--text); }
         <td>Pas de clause going concern dans les comptes 2025, mais avec un runway S1 2027 et ~22M€ de burn annuel, la question se reposera dans les comptes S1 2026 (publication été 2026).</td>
       </tr>
     </tbody>
-  </table>
+  </table></div>
 </div>
 
 
