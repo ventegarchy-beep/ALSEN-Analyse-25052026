@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sensorion (ALSEN) — Analyse Boursière — 25/05/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #050409;
+  --surface:  #08060f;
+  --surface2: #0e0b1a;
+  --border:   #1a1528;
+  --heading:  #f0eeff;
+  --text:     #b8b4d8;
+  --muted:    #7c78a0;
+  --accent:   #c084fc;
+  --accent2:  #d8b4fe;
+  --green:    #10b981;
+  --orange:   #fb923c;
+  --red:      #f43f5e;
+  --yellow:   #fbbf24;
+  --blue:     #38bdf8;
+  --ag:       rgba(16,185,129,.11);
+  --aw:       rgba(251,191,36,.09);
+  --ab:       rgba(192,132,252,.10);
+  --ar:       rgba(244,63,94,.11);
+  --ao:       rgba(251,146,60,.09);
+}
+html, body { overflow-x: hidden; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #08060f 0%, #0c091a 60%, #06040e 100%);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 40px 40px 34px;
+  margin: 28px 0 24px;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 92% 10%, rgba(192,132,252,.12) 0%, transparent 60%),
+              radial-gradient(ellipse 40% 40% at 8% 85%,  rgba(192,132,252,.07) 0%, transparent 50%);
+  pointer-events: none;
+}
+.badge {
+  display: inline-block;
+  background: rgba(192,132,252,.14);
+  border: 1px solid rgba(192,132,252,.35);
+  color: var(--accent2);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .10em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 20px;
+  margin-bottom: 16px;
+}
+.hero-title { font-size: clamp(24px,4vw,34px); font-weight: 700; color: var(--heading); letter-spacing:-.02em; line-height:1.1; margin-bottom:8px; }
+.hero-title span { color: var(--accent2); }
+.hero-tagline { color: var(--muted); font-size:13.5px; margin-bottom:22px; }
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 18px;
+  font-size: 12.5px; color: var(--muted);
+  margin-bottom: 24px; padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.hero-meta strong { color: var(--text); }
+.cours { font-family: 'DM Mono', monospace; color: var(--accent2); font-size: 20px; font-weight: 700; }
+.var-pos { color: var(--green); }
+
+/* CT/MT/LT */
+.tml-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.tml-badge {
+  display: flex; align-items: center; gap: 7px;
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 16px; background: var(--surface2);
+  font-size: 12.5px; font-weight: 600;
+}
+.dot { width: 9px; height: 9px; border-radius: 50%; }
+.dot-g { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.dot-y { background: var(--yellow); }
+.dot-r { background: var(--red); }
+.tml-hor { color: var(--muted); font-weight: 500; }
+
+/* Conviction */
+.conv-wrap {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(192,132,252,.10);
+  border: 1px solid rgba(192,132,252,.28);
+  border-radius: 10px; padding: 10px 22px;
+}
+.conv-val { font-family:'DM Mono',monospace; font-size:22px; font-weight:700; color: var(--orange); }
+.disclaimer { font-size:11px; color:var(--muted); margin-top:18px; opacity:.65; }
+
+/* ─── ALERTES ─── */
+.alert {
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 10px;
+  font-size: 13.5px; display: flex; gap: 10px; align-items: flex-start;
+  border: 1px solid transparent;
+}
+.alert strong { color: var(--heading); }
+.ico { font-size:16px; flex-shrink:0; margin-top:1px; }
+.ag  { background:var(--ag);  border-color:rgba(16,185,129,.22); }
+.aw  { background:var(--aw);  border-color:rgba(251,191,36,.22); }
+.ab  { background:var(--ab);  border-color:rgba(192,132,252,.22); }
+.ar  { background:var(--ar);  border-color:rgba(244,63,94,.22); }
+.ao  { background:var(--ao);  border-color:rgba(251,146,60,.22); }
+
+/* ─── SECTION ─── */
+.section {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px 28px 24px; margin-bottom: 20px;
+}
+.section-title {
+  font-size:16px; font-weight:700; color:var(--heading);
+  margin-bottom:18px; display:flex; align-items:center; gap:10px;
+}
+.section-title::after {
+  content:''; flex:1; height:1px;
+  background: linear-gradient(to right, var(--border), transparent);
+  margin-left:10px;
+}
+
+/* ─── TABLES ─── */
+.tbl { width:100%; border-collapse:collapse; font-size:13px; }
+.tbl th {
+  background:var(--surface2); color:var(--accent2);
+  padding:10px 12px; text-align:left;
+  font-size:11px; letter-spacing:.07em; text-transform:uppercase; font-weight:600;
+}
+.tbl td { padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:middle; }
+.tbl tr:last-child td { border-bottom:none; }
+.tbl tr:nth-child(even) td { background:rgba(14,11,26,.5); }
+.tbl tr.hi td { background:rgba(192,132,252,.08); }
+.acc { color:var(--accent2); font-weight:600; }
+
+/* ─── KPI GRID ─── */
+.kg { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:12px; }
+.kpi { background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; min-width:0; }
+.kl { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; margin-bottom:5px; }
+.kv { font-family:'DM Mono',monospace; font-size:20px; font-weight:700; color:var(--heading); line-height:1; }
+.kd { font-size:12px; margin-top:4px; }
+.kd.pos { color:var(--green); } .kd.neg { color:var(--red); } .kd.neu { color:var(--muted); }
+.ks { font-size:11px; color:var(--muted); margin-top:3px; }
+
+/* ─── REGIME TABLE ─── */
+.reg-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+.reg-tbl th { background:var(--surface2); color:var(--accent2); padding:10px 14px; text-align:left; font-weight:600; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; }
+.reg-tbl td { padding:11px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+.reg-tbl tr:last-child td { border-bottom:none; }
+.reg-tbl tr:nth-child(even) td { background:rgba(14,11,26,.5); }
+.tag-h { background:rgba(16,185,129,.14); color:var(--green); border-radius:4px; padding:2px 8px; font-size:11px; font-weight:600; }
+.tag-n { background:rgba(251,191,36,.11); color:var(--yellow); border-radius:4px; padding:2px 8px; font-size:11px; font-weight:600; }
+.tag-r { background:rgba(244,63,94,.12); color:var(--red); border-radius:4px; padding:2px 8px; font-size:11px; font-weight:600; }
+
+/* ─── FIBONACCI ─── */
+.fibo-row {
+  display:grid; grid-template-columns:70px 90px 1fr 80px;
+  align-items:center; gap:8px; margin-bottom:6px; font-size:12.5px;
+}
+.fp { color:var(--muted); font-weight:600; font-size:11px; text-align:right; }
+.fpr { font-family:'DM Mono',monospace; color:var(--heading); font-size:13px; }
+.fbar-w { background:var(--surface2); border-radius:4px; height:6px; overflow:hidden; }
+.fbar { height:100%; border-radius:4px; background:var(--border); }
+.f100 { background: var(--green); }
+.f61  { background: #a855f7; }
+.f50  { background: #c084fc; }
+.f38  { background: var(--accent2); }
+.f23  { background: var(--muted); }
+.f0   { background: var(--red); }
+.fl   { font-size:11px; color:var(--muted); }
+/* Cours actuel inline row */
+.fibo-cur {
+  display:grid; grid-template-columns:70px 90px 1fr 80px;
+  align-items:center; gap:8px; margin:8px 0;
+  background:linear-gradient(90deg,rgba(192,132,252,.14),rgba(192,132,252,.04));
+  border:1px solid rgba(192,132,252,.40);
+  border-radius:8px; padding:8px 6px; font-size:12.5px;
+}
+.fibo-cur .fp { color:var(--accent2); font-weight:700; font-size:11px; }
+.fibo-cur .fpr { color:var(--accent2); font-size:15px; font-weight:700; }
+
+/* ─── TIMELINE ─── */
+.tl { position:relative; padding-left:24px; }
+.tl::before { content:''; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:linear-gradient(to bottom,var(--accent),transparent); }
+.tl-item { position:relative; padding:0 0 22px 18px; }
+.tl-item::before { content:''; position:absolute; left:-18px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--accent); border:2px solid var(--surface); }
+.tld { display:inline-block; font-size:11px; font-weight:600; padding:2px 9px; border-radius:4px; margin-bottom:5px; }
+.tld-cat { background:rgba(192,132,252,.18); color:var(--accent2); }
+.tld-fin { background:rgba(16,185,129,.15); color:var(--green); }
+.tld-warn{ background:rgba(251,191,36,.13); color:var(--yellow); }
+.tld-neg { background:rgba(244,63,94,.13); color:var(--red); }
+.tld-ok  { background:rgba(56,189,248,.12); color:var(--blue); }
+.tl-date { font-size:12px; color:var(--muted); display:block; margin-top:3px; }
+.tl-desc { font-size:13.5px; color:var(--text); margin-top:3px; }
+
+/* ─── SCÉNARIOS ─── */
+.scen-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+.scen-card { background:var(--surface2); border-radius:12px; padding:18px 16px; border:1px solid var(--border); position:relative; overflow:hidden; }
+.scen-card.bull::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--green); }
+.scen-card.neu::before  { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--yellow); }
+.scen-card.bear::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--red); }
+.scen-l { font-size:13px; font-weight:700; margin-bottom:8px; }
+.scen-l.bull { color:var(--green); } .scen-l.neu { color:var(--yellow); } .scen-l.bear { color:var(--red); }
+.scen-p { font-family:'DM Mono',monospace; font-size:28px; font-weight:700; line-height:1; margin-bottom:10px; }
+.scen-p.bull { color:var(--green); } .scen-p.neu { color:var(--yellow); } .scen-p.bear { color:var(--red); }
+.scen-t { font-family:'DM Mono',monospace; font-size:14px; font-weight:600; color:var(--heading); margin-bottom:8px; }
+.scen-d { font-size:12px; color:var(--muted); line-height:1.55; }
+
+/* ─── SCORE ─── */
+.score-row { display:grid; grid-template-columns:160px 1fr auto; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+.score-row:last-child { border-bottom:none; }
+.score-name { font-size:13px; color:var(--heading); font-weight:600; }
+.score-bar-w { background:var(--surface2); border-radius:6px; height:8px; overflow:hidden; }
+.score-bar { height:100%; border-radius:6px; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+.score-val { font-family:'DM Mono',monospace; font-size:14px; font-weight:700; color:var(--accent2); }
+.score-sub { font-size:11.5px; color:var(--muted); margin-top:3px; grid-column:1/-1; }
+
+/* ─── CONCLUSION ─── */
+.conclu {
+  background: linear-gradient(135deg,rgba(192,132,252,.06),rgba(192,132,252,.02));
+  border: 1px solid rgba(192,132,252,.22);
+  border-radius: 14px; padding: 28px;
+}
+.conclu h2 { font-size:17px; font-weight:700; color:var(--heading); margin-bottom:16px; }
+.pros-cons { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:20px 0; }
+.pros, .cons { background:var(--surface2); border-radius:10px; padding:16px; }
+.pros h4 { color:var(--green); font-size:13px; margin-bottom:10px; }
+.cons h4 { color:var(--red); font-size:13px; margin-bottom:10px; }
+.pros ul, .cons ul { list-style:none; font-size:13px; }
+.pros li, .cons li { padding:4px 0; display:flex; gap:8px; }
+.pros li::before { content:'✓'; color:var(--green); flex-shrink:0; }
+.cons li::before { content:'✗'; color:var(--red); flex-shrink:0; }
+.levels-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:18px; }
+.level-card { background:var(--surface2); border-radius:10px; padding:14px 16px; border:1px solid var(--border); text-align:center; }
+.level-card .lc-label { font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); margin-bottom:6px; }
+.level-card .lc-val { font-family:'DM Mono',monospace; font-size:18px; font-weight:700; }
+.level-card.supp .lc-val { color:var(--green); }
+.level-card.res  .lc-val { color:var(--red); }
+.level-card.cat  .lc-val { color:var(--orange); font-size:14px; }
+
+/* ─── HIGHLIGHT BOX ─── */
+.hbox { background:rgba(192,132,252,.07); border:1px solid rgba(192,132,252,.18); border-radius:10px; padding:16px 18px; margin-top:14px; font-size:13px; }
+.hb-title { font-size:12px; font-weight:600; color:var(--accent2); text-transform:uppercase; letter-spacing:.07em; margin-bottom:8px; }
+
+/* ─── PILLS ─── */
+.pill { display:inline-block; font-size:11px; font-weight:600; padding:2px 9px; border-radius:4px; letter-spacing:.04em; }
+.pill-g { background:rgba(16,185,129,.15); color:var(--green); }
+.pill-r { background:rgba(244,63,94,.13); color:var(--red); }
+.pill-y { background:rgba(251,191,36,.13); color:var(--yellow); }
+.pill-a { background:rgba(192,132,252,.15); color:var(--accent2); }
+.pill-b { background:rgba(56,189,248,.12); color:var(--blue); }
+
+/* ─── FOOTER ─── */
+footer { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:22px 24px; font-size:12px; color:var(--muted); line-height:1.6; margin-top:24px; }
+footer strong { color:var(--text); }
+
+/* ─── LIVRAISON ─── */
+.livraison { background:var(--surface2); border:1px solid rgba(192,132,252,.35); border-radius:12px; padding:20px 24px; font-family:monospace; margin-top:24px; }
+.lv-title { color:var(--accent2); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:18px; }
+.lv-block { margin-bottom:14px; }
+.lv-label { color:var(--muted); font-size:11px; margin-bottom:6px; }
+.lv-row { display:flex; align-items:center; gap:10px; }
+.lv-code { background:var(--surface); color:var(--heading); border:1px solid var(--border); border-radius:6px; padding:9px 14px; font-size:12.5px; flex:1; word-break:break-all; }
+.lv-code.green { color:var(--green); }
+.lv-btn { display:flex; align-items:center; gap:5px; padding:9px 14px; border-radius:6px; white-space:nowrap; cursor:pointer; font-size:12px; border:none; font-weight:600; }
+.lv-btn.purple { background:var(--accent); color:#fff; }
+.lv-btn.greenbtn { background:var(--green); color:#fff; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width:600px) {
+  .hero { padding:24px 18px; }
+  .scen-row { grid-template-columns:1fr; }
+  .pros-cons { grid-template-columns:1fr; }
+  .levels-grid { grid-template-columns:1fr 1fr; }
+  .score-row { grid-template-columns:1fr auto; }
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+.hero, .alert, .section, .conclu { animation: fadeIn .45s ease both; }
+.section:nth-child(2) { animation-delay:.05s; }
+.section:nth-child(3) { animation-delay:.10s; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="badge">🧬 Thérapie Génique · Surdité · Maladies Rares · Euronext Growth Paris</div>
+  <h1 class="hero-title">Sensorion <span>(ALSEN)</span></h1>
+  <p class="hero-tagline">Biotech pionnière en thérapie génique pour l'audition — Montpellier, France — ISIN FR0012596468</p>
+
+  <div class="hero-meta">
+    <div>📅 <strong>Analyse du 25/05/2026 à 17h19 CEST</strong></div>
+    <div>📍 <strong>Siège :</strong> Montpellier (34830), France</div>
+    <div>💹 Cours : <span class="cours">0,4050€</span> &nbsp;<span class="var-pos">▲ +2,14%</span></div>
+    <div>🏷️ <strong>Cap. boursière :</strong> ~209 M€</div>
+    <div>🕐 Timeframe : <strong>1S (Semaine) — référence</strong></div>
+  </div>
+
+  <div class="tml-row">
+    <div class="tml-badge"><span class="dot dot-y"></span><span class="tml-hor">CT</span>&nbsp;<strong>NEUTRE</strong></div>
+    <div class="tml-badge"><span class="dot dot-g"></span><span class="tml-hor">MT</span>&nbsp;<strong>HAUSSIER CONDITIONNEL</strong></div>
+    <div class="tml-badge"><span class="dot dot-g"></span><span class="tml-hor">LT</span>&nbsp;<strong>HAUSSIER</strong></div>
+  </div>
+
+  <div class="conv-wrap">
+    <span style="font-size:16px">⭐</span>
+    <span style="color:var(--muted);font-size:12.5px">Conviction globale</span>
+    <span class="conv-val">5,8 / 10</span>
+  </div>
+
+  <p class="disclaimer">⚠️ Analyse non professionnelle (NPC) — À titre informatif uniquement — Aucun conseil en investissement — Les performances passées ne préjugent pas des performances futures.</p>
+</div>
+
+
+<!-- ═══ ALERTES ═══ -->
+<div class="alert ag">
+  <span class="ico">👤</span>
+  <div><strong>Nomination Fred Chereau — Directeur Général (1er juin 2026) :</strong> Annoncé le 18/05/2026, Fred Chereau prend la direction générale le 1er juin. Venu d'<strong>Alexion-AstraZeneca Rare Disease</strong> (Senior VP Strategy & Business Development), ex-CEO de LogicBio Therapeutics (acquis par Alexion en 2022). 30 ans d'expérience biotech/pharma, expertise en thérapie génique et en maladies rares. Ce profil est idéal pour commercialiser et trouver des partenaires industriels sur SENS-501 et SENS-601. Signal très positif sur la maturité de l'organisation.</div>
+</div>
+  <div><strong>Lock-up AK janvier 2026 — ENCORE EN VIGUEUR (expiration ~28/07/2026) :</strong> L'offre réservée de 60 M€ (214 285 714 actions à 0,28€) réalisée le 30/01/2026 est assortie d'un lock-up de 180 jours → expiration estimée ~28 juillet 2026. Sanofi (13,9%), Redmile (16,5%), Artal/Invus (20,2%) et Sofinnova (12,6%) ne peuvent pas vendre avant cette date. <strong>Pression vendeuse potentiellement significative à l'approche de juillet 2026.</strong></div>
+</div>
+<div class="alert aw">
+  <span class="ico">⏳</span>
+  <div><strong>Runway trésorerie : S1 2027 ≈ 12 mois restants :</strong> Horizon de trésorerie annoncé explicitement par Sensorion comme étant le "premier semestre 2027". Cash burn ~22 M€/an. <strong>Une nouvelle AK avant mi-2027 est probable</strong> — facteur de dilution potentiel à intégrer dans toute thèse d'investissement.</div>
+</div>
+<div class="alert ag">
+  <span class="ico">🧬</span>
+  <div><strong>Sanofi actionnaire stratégique (13,9%) :</strong> Investissement de 20 M€ en janvier 2026 — validation scientifique de haut niveau sur le programme de thérapie génique. Sanofi est l'un des leaders mondiaux du secteur de l'audition (ex-Regeneron concurrence). Présence au capital = signal positif fort sur la crédibilité du pipeline.</div>
+</div>
+<div class="alert ao">
+  <span class="ico">🏆</span>
+  <div><strong>Régénéron FDA approval avril 2026 :</strong> Approbation FDA d'une thérapie génique OTOF par Regeneron → <strong>validation directe de la modalité SENS-501</strong>, mais aussi <strong>concurrent commercial sur le marché américain</strong>. Impact ambivalent : crédibilité du champ (+) mais course au marché désormais engagée (−).</div>
+</div>
+
+
+<!-- ═══ RÉGIME MARCHÉ ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>🌡️</span> Régime de marché — 25/05/2026</h2>
+  <table class="reg-tbl">
+    <thead><tr><th>Indice / Secteur</th><th>Régime</th><th>Impact ALSEN</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>CAC 40</strong></td>
+        <td><span class="tag-h">Rebond géopolitique</span></td>
+        <td>+1% ce jour à ~8 195 pts — Trump annonce bases d'un protocole USA-Iran (détroit d'Ormuz), pétrole sous 100$/baril. Marché risk-on favorable aux biotechs spéculatives.</td>
+      </tr>
+      <tr>
+        <td><strong>Biotech EU</strong></td>
+        <td><span class="tag-h">Reprise sectorielle</span></td>
+        <td>Regain d'appétit pour les biotechs européennes. Validation de la thérapie génique par l'approbation Regeneron FDA → halo d'intérêt sur tout le secteur thérapie génique audition.</td>
+      </tr>
+      <tr>
+        <td><strong>Thérapie génique (global)</strong></td>
+        <td><span class="tag-h">Structurellement haussier</span></td>
+        <td>Plusieurs approbations de thérapies géniques en 2025-2026 (Casgevy, Zynteglo) → changement de paradigme réglementaire. Sensorion dans un secteur en pleine légitimation.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:14px;font-size:12.5px;color:var(--muted);padding:10px 14px;background:var(--surface2);border-radius:8px;">
+    💡 <strong style="color:var(--text);">Bêta élevé</strong> — ALSEN est une nano cap de spéculation pure. La volatilité intrinsèque (pipeline binaire) domine largement le signal macro. Un contexte risk-on est nécessaire mais insuffisant — les catalyseurs endogènes (données cliniques) sont les vrais déclencheurs.
+  </div>
+</div>
+
+
+<!-- ═══ CHECKLIST PRÉ-ANALYSE ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>✅</span> Checklist pré-analyse — 7 points de vigilance</h2>
+  <table class="tbl">
+    <thead><tr><th>#</th><th>Question</th><th>Réponse</th><th>Statut</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Nombre d'actions</strong></td>
+        <td>514 946 940 actions post-AK 30/01/2026 (source : prospectus BusinessWire jan. 2026)</td>
+        <td><span class="pill pill-y">⚠️ Fortement dilué</span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>AK récente</strong></td>
+        <td>60 M€ à 0,28€ le 30/01/2026 · +214 285 714 actions = +71% du capital pré-AK. Sanofi 20M€ + fonds spécialisés.</td>
+        <td><span class="pill pill-r">Dilution massive</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Lock-up expiration</strong></td>
+        <td>Offre réservée 30/01/2026 + 180 jours → expiration ~28/07/2026. ENCORE EN VIGUEUR.</td>
+        <td><span class="pill pill-r">⚠️ ~2 mois restants</span></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>AG prochaine</strong></td>
+        <td>AG Mixte du 11/05/2026 tenue à Paris — PASSÉE. Toutes résolutions recommandées adoptées.</td>
+        <td><span class="pill pill-b">Passée ✓</span></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>Short interest</strong></td>
+        <td>Non disponible dans les sources publiques gratuites pour Euronext Growth.</td>
+        <td><span class="pill pill-a">Non dispo</span></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><strong>Going concern</strong></td>
+        <td>Pas de clause going concern dans les résultats annuels 2025 (18/03/2026). Runway S1 2027 = ~12 mois → risque à surveiller en 2026.</td>
+        <td><span class="pill pill-y">⚠️ Runway court</span></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><strong>Trésorerie runway</strong></td>
+        <td>~57 M€ estimée (47,5 M€ fin 2025 + 60 M€ nets jan 2026 − burn depuis jan.). Cash burn ~22 M€/an → ~2,5 ans théorique mais annoncé S1 2027.</td>
+        <td><span class="pill pill-y">S1 2027</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══ KPIs ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>📊</span> KPIs clés</h2>
+  <div class="kg">
+    <div class="kpi">
+      <div class="kl">Cours</div>
+      <div class="kv">0,405€</div>
+      <div class="kd pos">▲ +2,14%</div>
+      <div class="ks">25/05/2026 17h19</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Cap. boursière</div>
+      <div class="kv" style="font-size:17px">~209M€</div>
+      <div class="kd neu">Small cap</div>
+      <div class="ks">514 946 940 × 0,405€</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Trésorerie</div>
+      <div class="kv" style="font-size:17px">~57M€</div>
+      <div class="kd pos">Runway S1 2027</div>
+      <div class="ks">Post-AK 60M€ jan. 2026</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Tréso / action</div>
+      <div class="kv">0,11€</div>
+      <div class="kd neg">27% du cours</div>
+      <div class="ks">Dilution massive jan. 2026</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">RSI (14)</div>
+      <div class="kv" style="color:var(--yellow)">51,19</div>
+      <div class="kd neu">Zone neutre</div>
+      <div class="ks">Juste au-dessus de 50</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">MACD Zéro Lag</div>
+      <div class="kv" style="font-size:17px;color:var(--yellow)">+0,012</div>
+      <div class="kd neu">Quasi flat</div>
+      <div class="ks">Signal marginal</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Fibo actuel</div>
+      <div class="kv" style="font-size:14px;color:var(--red)">Zone basse</div>
+      <div class="kd neg">23,6% – 38,2%</div>
+      <div class="ks">0,370€ → 0,5005€</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Nb actions</div>
+      <div class="kv" style="font-size:15px">514,9M</div>
+      <div class="kd neg">+71% en jan. 2026</div>
+      <div class="ks">Post-AK 30/01/2026</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Objectif analyste</div>
+      <div class="kv" style="color:var(--orange)">1,64€</div>
+      <div class="kd pos">+305% upside</div>
+      <div class="ks">1 analyste (Achat)</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Prix AK jan. 2026</div>
+      <div class="kv" style="font-size:17px">0,28€</div>
+      <div class="kd pos">+45% depuis AK</div>
+      <div class="ks">Signal positif</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">52 semaines</div>
+      <div class="kv" style="font-size:13px">0,159€–0,81€</div>
+      <div class="kd pos">+155% du creux</div>
+      <div class="ks">Creux fév.25/ATH mars 26</div>
+    </div>
+    <div class="kpi">
+      <div class="kl">Sanofi au capital</div>
+      <div class="kv" style="font-size:15px">13,9%</div>
+      <div class="kd pos">20M€ stratégiques</div>
+      <div class="ks">Validation scientifique</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ SOCIÉTÉ & PIPELINE ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>🎧</span> Présentation société & Pipeline</h2>
+  <p style="font-size:13.5px;margin-bottom:18px;color:var(--text);">
+    Sensorion est une société de biotechnologie clinique fondée en 2009, pionnière dans le développement de thérapies géniques pour l'<strong style="color:var(--accent2);">oreille interne</strong>. Basée à Montpellier, elle est la seule biotech européenne cotée pure-play sur les maladies auditives génétiques. Son pipeline couvre la surdité congénitale pédiatrique, la presbyacousie progressive et la surdité acquise. En janvier 2026, Sanofi a investi 20 M€ — validation externe de premier ordre du potentiel de ses programmes de thérapie génique.
+  </p>
+  <table class="tbl">
+    <thead><tr><th>Candidat</th><th>Cible / Indication</th><th>Stade</th><th>Partenaire</th><th>Prochain jalon</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="acc">SENS-501</td>
+        <td>Mutations OTOF — surdité congénitale (DFNB9)</td>
+        <td><span class="pill pill-a">Phase 1/2 Audiogene</span></td>
+        <td>—</td>
+        <td>Données 12 mois Cohorte 2 — <strong>Q4 2026</strong></td>
+      </tr>
+      <tr>
+        <td class="acc">SENS-601 (GJB2-GT)</td>
+        <td>Mutations GJB2 — surdité congénitale + presbyacousie précoce (~50% surdités)</td>
+        <td><span class="pill pill-y">Préclinique → IND</span></td>
+        <td>Institut Pasteur (co-dev.)</td>
+        <td>Soumission CTA/IND — <strong>S1 2026</strong> (imminente)</td>
+      </tr>
+      <tr>
+        <td class="acc">SENS-401 (Arazasetron)</td>
+        <td>SSNHL, implant cochléaire, ototoxicité cisplatine</td>
+        <td><span class="pill pill-b">Phase 2 terminée</span></td>
+        <td>Cochlear Limited (implant)</td>
+        <td>Évaluation partenariat / prochaine étude</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:14px;font-size:12.5px;color:var(--muted);background:var(--surface2);border-radius:8px;padding:12px 16px;border-left:3px solid var(--accent);">
+    ⚠️ <strong style="color:var(--text);">Compétition sur SENS-501</strong> : Regeneron a obtenu l'approbation FDA d'une thérapie génique OTOF en avril 2026 → Sensorion est désormais <em>challenger</em> sur le marché américain de la surdité OTOF. Avantage comparatif de Sensorion : différenciation scientifique (vecteur dual-AAV), données de tolérance confirmées, accès marché européen non encore disputé.
+  </div>
+</div>
+
+
+<!-- ═══ COMPARAISON SECTORIELLE ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>⚖️</span> Comparaison sectorielle — Biotechs thérapie génique EU</h2>
+  <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px;">Comparaison sur capitalisation / trésorerie / stade pipeline — P/S et P/E non pertinents (zéro revenu commercial)</p>
+  <table class="tbl">
+    <thead><tr><th>Société</th><th>Ticker</th><th>Cap. (M€)</th><th>Tréso (M€)</th><th>Stade lead</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>GenSight Biologics</td>
+        <td>SIGHT.PA</td>
+        <td>~40M€</td>
+        <td>~15M€</td>
+        <td>Phase 3 (LHON · approbation EMA en attente)</td>
+        <td>Thérapie génique maladies rares, stade plus avancé sur LHON mais tréso inférieure</td>
+      </tr>
+      <tr>
+        <td>Lysogène</td>
+        <td>ALLYG</td>
+        <td>~30M€</td>
+        <td>~5M€</td>
+        <td>Phase 2/3 (MPS IIIA)</td>
+        <td>Thérapie génique neurologique pédiatrique, même profil mais tréso bien inférieure</td>
+      </tr>
+      <tr>
+        <td>Pharnext</td>
+        <td>ALPNX</td>
+        <td>~20M€</td>
+        <td>&lt;3M€</td>
+        <td>Phase 3 (CMT)</td>
+        <td>Maladies rares neurologiques, tréso précaire, dilution historique forte</td>
+      </tr>
+      <tr class="hi">
+        <td><strong>Sensorion</strong></td>
+        <td><strong>ALSEN</strong></td>
+        <td><strong>~209M€</strong></td>
+        <td><strong>~57M€</strong></td>
+        <td><strong>Phase 1/2 (SENS-501) + IND (SENS-601)</strong></td>
+        <td style="color:var(--yellow)"><strong>Prime de valorisation vs pairs — justifiée par la tréso solide, Sanofi au capital et le marché de l'audition (>450M personnes touchées). Risque : stade encore précoce et concurrence Regeneron.</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="hbox">
+    <div class="hb-title">🔎 Position relative</div>
+    Sensorion est valorisée 5-7× ses comparables cotés, une prime qui reflète la présence de Sanofi + le marché adressable immense de la surdité génétique (~50M € GJB2 seul). Cette prime est <strong style="color:var(--yellow);">conditionnelle aux données cliniques</strong> : un résultat décevant sur SENS-501 Q4 2026 ramènerait probablement la capitalisation en ligne avec ses pairs (~40-80M€), soit une décote de -60% à -80%.
+  </div>
+</div>
+
+
+<!-- ═══ CHRONOLOGIE ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>🗓️</span> Chronologie clés</h2>
+  <div class="tl">
+
+    <div class="tl-item">
+      <span class="tld tld-neg">Creux absolu</span>
+      <span class="tl-date">Fin 2024 / Début 2025</span>
+      <p class="tl-desc">Cours à 0,159€ — point bas absolu. Trésorerie sous pression, doutes sur la continuité. Représente le niveau 0% du tracé Fibonacci actuel.</p>
+    </div>
+
+    <div class="tl-item">
+      <span class="tld tld-fin">AK transformatrice + Sanofi</span>
+      <span class="tl-date">28–30 janvier 2026</span>
+      <p class="tl-desc">60 M€ levés à 0,28€/action via offre réservée : Sanofi 20M€ (13,9% du capital), Redmile, Artal/Invus, Sofinnova + fonds américains. Horizon tréso porté à S1 2027. <strong>214 285 714 nouvelles actions = +71% de dilution.</strong> Lock-up 180 jours → expiration ~28/07/2026.</p>
+    </div>
+
+    <div class="tl-item">
+      <span class="tld tld-ok">Nouveau DG Fred Chereau</span>
+      <span class="tl-date">Annoncé 18/05/2026 · Prise de fonction 1er juin 2026</span>
+      <p class="tl-desc">Fred Chereau nommé Directeur Général, succédant à Amit Munshi (intérimaire depuis fév. 2026). Profil exceptionnel : ex-Alexion/AstraZeneca Rare Disease + ex-CEO LogicBio Therapeutics (acquis par Alexion en 2022). 30 ans d'expérience en biotech et industrie pharmaceutique avec une expertise en thérapie génique. <strong>Son réseau chez AstraZeneca/Alexion peut grandement faciliter des partenariats commerciaux pour SENS-601 (GJB2).</strong> Géraldine Honnet (CMO) quitte également pour une biotech privée.</p>
+    </div>
+
+    <div class="tl-item">
+      <span class="tld tld-cat">Résultats annuels 2025 + données SENS-501</span>
+      <span class="tl-date">18 mars 2026</span>
+      <p class="tl-desc">Publication résultats annuels + données efficacité 6 mois Cohorte 2 Audiogene (SENS-501) : maintien des gains auditifs à 6 mois chez 2/3 patients haute dose, signal dose-réponse confirmé. ATH graphique à ~0,80-0,81€ dans les jours suivants.</p>
+    </div>
+
+    <div class="tl-item">
+      <span class="tld tld-cat">Approbation FDA Regeneron</span>
+      <span class="tl-date">Avril 2026</span>
+      <p class="tl-desc">Regeneron obtient l'approbation FDA d'une thérapie génique OTOF → double impact : validation de la modalité (positif pour Sensorion) mais concurrent commercial désormais sur le marché US (négatif pour SENS-501 sur les USA). Cours ALSEN réagit avec un rebond temporaire.</p>
+    </div>
+
+    <div class="tl-item">
+      <span class="tld tld-ok">AG 11 mai + ASGCT Boston</span>
+      <span class="tl-date">11–15 mai 2026</span>
+      <p class="tl-desc">AG Mixte tenue le 11/05 — toutes résolutions adoptées (autorisations de capital incluses probablement). Participation ASGCT 2026 à Boston (11-15 mai) : 2 posters présentés — données précliniques SENS-601 (GJB2-GT) et processus de fabrication AAV. Pas de données cliniques explosives — développement technique.</p>
+    </div>
+
+    <div class="tl-item">
+      <span class="tld" style="background:rgba(192,132,252,.18);color:var(--accent2);">⚡ PROCHAIN — Lock-up expiration</span>
+      <span class="tl-date">~28 juillet 2026</span>
+      <p class="tl-desc">Expiration estimée du lock-up 180 jours sur les 214M actions émises en janvier 2026 (Sanofi 13,9%, Redmile 16,5%, Artal 20,2%, Sofinnova 12,6%). <strong>Risque de pression vendeuse majeure à surveiller.</strong> Le cours actuel (+45% vs prix AK 0,28€) laisse des plus-values latentes pour les souscripteurs.</p>
+    </div>
+
+    <div class="tl-item">
+      <span class="tld" style="background:rgba(192,132,252,.18);color:var(--accent2);">⚡ PROCHAIN — Données SENS-501 12 mois</span>
+      <span class="tl-date">Q4 2026</span>
+      <p class="tl-desc">Données de suivi à 12 mois de la Cohorte 2 de l'essai Audiogene (SENS-501) — CATALYSEUR BINAIRE MAJEUR. Si positives (maintien ou amélioration des gains auditifs) → potentiel déclencheur de Cohorte 3 et/ou partnership. Si décevantes → fort repli possible.</p>
+    </div>
+
+    <div class="tl-item">
+      <span class="tld" style="background:rgba(192,132,252,.18);color:var(--accent2);">⚡ PROCHAIN — CTA SENS-601</span>
+      <span class="tl-date">S1 2026 (imminent)</span>
+      <p class="tl-desc">Soumission CTA (EMA) et IND (FDA) pour SENS-601 (GJB2-GT) — première entrée en clinique humaine du programme GJB2. Soumission annoncée pour S1 2026 → peut tomber dans les prochaines semaines. Approbation attendue en 2026.</p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══ ANALYSE TECHNIQUE ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>📈</span> Analyse technique — Timeframe 1S (Semaine)</h2>
+
+  <h3 style="font-size:14px;color:var(--accent2);margin-bottom:14px;font-weight:600;">🔢 Niveaux Fibonacci</h3>
+  <p style="font-size:12.5px;color:var(--muted);margin-bottom:16px;">Tracé entre <strong style="color:var(--red)">0,159€</strong> (creux absolu — fin 2024/début 2025) et <strong style="color:var(--green)">1,053€</strong> (ATH de swing — mars 2026). Amplitude : 0,894€.</p>
+
+  <div style="margin-top:14px;">
+    <div class="fibo-row">
+      <div class="fp">100%</div>
+      <div class="fpr">1,053€</div>
+      <div class="fbar-w"><div class="fbar f100" style="width:100%"></div></div>
+      <div class="fl">ATH swing / Résistance ultime</div>
+    </div>
+    <div class="fibo-row">
+      <div class="fp">78,6%</div>
+      <div class="fpr">0,862€</div>
+      <div class="fbar-w"><div class="fbar f61" style="width:78.6%"></div></div>
+      <div class="fl">Résistance forte</div>
+    </div>
+    <div class="fibo-row">
+      <div class="fp">61,8%</div>
+      <div class="fpr">0,712€</div>
+      <div class="fbar-w"><div class="fbar f61" style="width:61.8%"></div></div>
+      <div class="fl">Résistance rouge chart</div>
+    </div>
+    <div class="fibo-row">
+      <div class="fp">50%</div>
+      <div class="fpr">0,606€</div>
+      <div class="fbar-w"><div class="fbar f50" style="width:50%"></div></div>
+      <div class="fl">Résistance intermédiaire</div>
+    </div>
+    <div class="fibo-row">
+      <div class="fp">38,2%</div>
+      <div class="fpr">0,501€</div>
+      <div class="fbar-w"><div class="fbar f38" style="width:38.2%"></div></div>
+      <div class="fl">Résistance proche — plafond CT</div>
+    </div>
+    <!-- COURS ACTUEL -->
+    <div class="fibo-cur">
+      <div class="fp">▶ ACTUEL</div>
+      <div class="fpr">0,405€</div>
+      <div class="fbar-w"><div class="fbar" style="width:27.3%;background:linear-gradient(90deg,var(--accent),var(--accent2));"></div></div>
+      <div style="font-size:11px;color:var(--accent2);font-weight:600">+2,14% · Zone basse</div>
+    </div>
+    <div class="fibo-row">
+      <div class="fp">23,6%</div>
+      <div class="fpr">0,370€</div>
+      <div class="fbar-w"><div class="fbar f23" style="width:23.6%"></div></div>
+      <div class="fl">⬅ Support immédiat — cours au-dessus (fragile)</div>
+    </div>
+    <div class="fibo-row">
+      <div class="fp">0%</div>
+      <div class="fpr">0,159€</div>
+      <div class="fbar-w"><div class="fbar f0" style="width:5%"></div></div>
+      <div class="fl">Creux absolu — plancher ultime</div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;background:rgba(251,146,60,.07);border:1px solid rgba(251,146,60,.20);border-radius:8px;padding:12px 16px;font-size:13px;">
+    ⚠️ <strong style="color:var(--orange)">Position technique défavorable</strong> — Le cours à 0,405€ se situe dans la zone basse du Fibonacci (entre 23,6% et 38,2%). Il ne se trouve ni sur un support ni sur une résistance forte. La zone 0,30-0,37€ (support vert chart + Fibo 23,6%) constitue le seul plancher de sécurité proche.
+  </div>
+
+  <h3 style="font-size:14px;color:var(--accent2);margin:24px 0 14px;font-weight:600;">🔍 Figures chartistes — Scan 1S</h3>
+
+  <div style="background:rgba(192,132,252,.06);border:1px solid rgba(192,132,252,.18);border-radius:10px;padding:16px 18px;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+      <span style="font-size:18px">➡️</span>
+      <strong style="color:var(--accent2);font-size:14px">RANGE / CONSOLIDATION</strong>
+      <span class="pill pill-a">Confirmée</span>
+    </div>
+    <p style="font-size:13px;color:var(--text)">
+      Canal horizontal post-spike de mars 2026 : borne basse ~0,30€ (support vert chart), borne haute ~0,50€ (Fibo 38,2%). Le titre consolide depuis ~6 semaines dans ce range, sans figure directionnelle claire. Breakout haussier au-dessus de 0,50€ avec volumes = signal de reprise vers 0,606€ (Fibo 50%). Retour sous 0,30€ = signal d'abandon du range.
+    </p>
+  </div>
+
+  <div style="background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.15);border-radius:10px;padding:16px 18px;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+      <span style="font-size:18px">📉</span>
+      <strong style="color:var(--red);font-size:14px">SPIKE & RETRACE — Figure complète</strong>
+      <span class="pill pill-r">Invalidante</span>
+    </div>
+    <p style="font-size:13px;color:var(--text)">
+      Fort spike haussier vers ~0,80€ (mars 2026, données SENS-501 Cohorte 2) suivi d'un retrace brutal jusqu'à ~0,30€. Comportement classique de "sell the news" sur une biotech après un catalyseur positif. Le retrace a effacé plus de 60% du mouvement. <strong>Signal de méfiance pour les entrées sur les prochains catalyseurs.</strong>
+    </p>
+  </div>
+
+  <h3 style="font-size:14px;color:var(--accent2);margin:24px 0 14px;font-weight:600;">📉 Indicateurs — Synthèse</h3>
+  <table class="tbl">
+    <thead><tr><th>Indicateur</th><th>Valeur</th><th>Lecture</th><th>Signal</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>RSI (14)</strong></td>
+        <td style="font-family:'DM Mono',monospace">51,19</td>
+        <td>Strictement neutre, juste au-dessus de 50. Ni sur-acheté ni sur-vendu.</td>
+        <td><span class="pill pill-a">Neutre</span></td>
+      </tr>
+      <tr>
+        <td><strong>MACD Zéro Lag (12,26,9)</strong></td>
+        <td style="font-family:'DM Mono',monospace">+0,012</td>
+        <td>Marginalement positif. Histogramme quasi plat. Pas de dynamique haussière établie.</td>
+        <td><span class="pill pill-y">Quasi flat</span></td>
+      </tr>
+      <tr>
+        <td><strong>Bandes de Bollinger (20,2)</strong></td>
+        <td>—</td>
+        <td>Bandes en légère contraction après l'expansion post-spike → compression en cours. Potentiel squeeze avant un nouveau mouvement directionnel. Direction inconnue à ce stade.</td>
+        <td><span class="pill pill-y">Compression</span></td>
+      </tr>
+      <tr>
+        <td><strong>Volumes</strong></td>
+        <td>—</td>
+        <td>Spike de volumes majeur en mars 2026 (ATH) suivi d'un retour à la normale. Volumes actuels faibles à modérés — consolidation sans conviction.</td>
+        <td><span class="pill pill-y">Faibles — Attente</span></td>
+      </tr>
+      <tr>
+        <td><strong>SMA 20 / 50 / 100</strong></td>
+        <td>—</td>
+        <td>Cours oscillant autour des MMs court terme. Configuration mixte — pas d'alignement haussier ni baissier clair. Ichimoku : cours dans le nuage ou juste en-dessous.</td>
+        <td><span class="pill pill-a">Mixte</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══ CONSENSUS ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>🔬</span> Consensus analystes</h2>
+  <table class="tbl">
+    <thead><tr><th>Analyste</th><th>Maison</th><th>Recommandation</th><th>Objectif</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>—</td>
+        <td><strong>Non identifiable en source libre</strong></td>
+        <td><span class="pill pill-g">Achat</span></td>
+        <td style="font-family:'DM Mono',monospace;font-size:15px;color:var(--orange)">1,64€*</td>
+        <td>*Source image Boursorama — nom de l'analyste non disponible en sources gratuites · objectif sur 5 mois</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="hbox">
+    <div class="hb-title">📊 Dispersion consensus (source : Boursorama, image)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;font-size:13px;">
+      <div style="text-align:center"><div style="color:var(--muted);font-size:11px;margin-bottom:4px">OBJ MIN</div><div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--accent2)">1,64€</div></div>
+      <div style="text-align:center"><div style="color:var(--muted);font-size:11px;margin-bottom:4px">OBJ MOYEN</div><div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--accent2)">1,64€</div></div>
+      <div style="text-align:center"><div style="color:var(--muted);font-size:11px;margin-bottom:4px">OBJ MAX</div><div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--accent2)">1,64€</div></div>
+      <div style="text-align:center"><div style="color:var(--muted);font-size:11px;margin-bottom:4px">NB ANALYSTES</div><div style="font-family:'DM Mono',monospace;font-size:18px;color:var(--muted)">1</div></div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px;">
+      ℹ️ <strong style="color:var(--text)">1 analyste visible sur Boursorama (source image)</strong> — Objectif 1,64€ = upside théorique de +305%. Cet objectif est <em>très ambitieux</em> : il représente Fibo 61,8% (0,712€) × 2,3 — soit bien au-delà de l'ATH actuel du graphique (1,053€). À interpréter avec prudence. La couverture très limitée (1 analyste) réduit la fiabilité du consensus. NB : des maisons comme Bryan Garnier/Stifel ont participé aux placements des AK précédentes de Sensorion — biais potentiel à considérer.
+    </p>
+  </div>
+</div>
+
+
+<!-- ═══ SCÉNARIOS ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>🎯</span> Scénarios probabilisés</h2>
+  <div class="scen-row">
+    <div class="scen-card bull">
+      <div class="scen-l bull">🟢 Haussier</div>
+      <div class="scen-p bull">30%</div>
+      <div class="scen-t">→ 0,50€ puis 0,606€</div>
+      <div class="scen-d">
+        <strong>Déclencheurs :</strong><br>
+        · Soumission CTA SENS-601 approuvée (imminente)<br>
+        · Données SENS-501 12 mois Coh.2 positives (Q4 2026)<br>
+        · Lock-up absorbé sans pression (août 2026)<br>
+        · Partenariat commercial SENS-501 ou SENS-601<br><br>
+        <strong>Horizon :</strong> 3–6 mois<br>
+        <em>Cibles : Fibo 38,2% (0,50€) puis 50% (0,606€)</em>
+      </div>
+    </div>
+    <div class="scen-card neu">
+      <div class="scen-l neu">🟡 Neutre</div>
+      <div class="scen-p neu">45%</div>
+      <div class="scen-t">→ 0,30€ – 0,50€</div>
+      <div class="scen-d">
+        <strong>Déclencheurs :</strong><br>
+        · CTA soumise sans approbation immédiate<br>
+        · Pas de news entre mai et les données 12 mois<br>
+        · Lock-up juillet absorbé progressivement<br>
+        · Marché en attente de catalyseurs datés<br><br>
+        <strong>Horizon :</strong> 2–4 mois<br>
+        <em>Range 0,30-0,50€ maintenu</em>
+      </div>
+    </div>
+    <div class="scen-card bear">
+      <div class="scen-l bear">🔴 Baissier</div>
+      <div class="scen-p bear">25%</div>
+      <div class="scen-t">→ 0,30€ puis 0,25€</div>
+      <div class="scen-d">
+        <strong>Déclencheurs :</strong><br>
+        · Pression vendeuse lock-up juillet 2026<br>
+        · Données SENS-501 12 mois décevantes<br>
+        · Besoin AK annoncé avant S1 2027<br>
+        · Corrections macro + risk-off<br><br>
+        <strong>Horizon :</strong> 1–3 mois<br>
+        <em>Retour sur support 0,30€ / sous 0,25€</em>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:14px;padding:10px 14px;background:var(--surface2);border-radius:8px;">Σ = 30% + 45% + 25% = 100% ✓ — Probabilités reflétant la nature spéculative du dossier (pipeline binaire Q4 2026, lock-up imminent, tréso limitée)</p>
+</div>
+
+
+<!-- ═══ RISQUES ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>⚠️</span> Risques & Points de vigilance</h2>
+  <table class="tbl">
+    <thead><tr><th>Risque</th><th>Niveau</th><th>Commentaire</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Lock-up ~28/07/2026</strong></td>
+        <td><span class="pill pill-r">Élevé</span></td>
+        <td>Sanofi (13,9%), Redmile (16,5%), Artal (20,2%), Sofinnova (12,6%) = 62,8% du capital nouvellement émis. En plus-value latente à +45% vs prix AK. Fort risque de ventes à l'expiration.</td>
+      </tr>
+      <tr>
+        <td><strong>Runway S1 2027</strong></td>
+        <td><span class="pill pill-r">Élevé</span></td>
+        <td>Horizon annoncé S1 2027 = ~12 mois. Cash burn ~22 M€/an. Nouvelle AK probable avant mi-2027. Historique dilutif lourd (+71% en jan 2026, multiples AK précédentes).</td>
+      </tr>
+      <tr>
+        <td><strong>Concurrence Regeneron (SENS-501)</strong></td>
+        <td><span class="pill pill-y">Modéré</span></td>
+        <td>FDA approval d'une thérapie OTOF en avril 2026 → SENS-501 devient challenger sur le marché US. Impact européen moindre (Regeneron n'a pas encore l'AMM EMA). Différenciation technologique maintenue.</td>
+      </tr>
+      <tr>
+        <td><strong>Risque clinique binaire</strong></td>
+        <td><span class="pill pill-y">Modéré</span></td>
+        <td>SENS-501 données 12 mois Q4 2026 = événement binaire. Cohorte 2 : 3 patients seulement → statistiques limitées. Une non-réponse chez un patient supplémentaire peut changer l'interprétation.</td>
+      </tr>
+      <tr>
+        <td><strong>Transition CEO → Fred Chereau</strong></td>
+        <td><span class="pill pill-g">Résolu positivement</span></td>
+        <td>Nomination annoncée 18/05 — Fred Chereau (ex-Alexion/AstraZeneca, ex-CEO LogicBio) prend la direction le 1er juin. Profil idéal pour la phase de commercialisation et partenariats. La CMO Géraldine Honnet quitte aussi — renouvellement à surveiller mais risque limité.</td>
+      </tr>
+      <tr>
+        <td><strong>Going concern potentiel S2 2027</strong></td>
+        <td><span class="pill pill-a">Surveillé</span></td>
+        <td>Pas de clause going concern dans les comptes 2025, mais avec un runway S1 2027 et ~22M€ de burn annuel, la question se reposera dans les comptes S1 2026 (publication été 2026).</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══ SCORE ═══ -->
+<div class="section">
+  <h2 class="section-title"><span>⭐</span> Score de conviction détaillé</h2>
+
+  <div class="score-row">
+    <div><div class="score-name">🔧 Technique</div><div style="font-size:12px;color:var(--muted)">Pondération 25%</div></div>
+    <div><div class="score-bar-w"><div class="score-bar" style="width:50%"></div></div></div>
+    <div class="score-val">5,0 / 10</div>
+    <div class="score-sub">RSI 51 neutre · MACD +0,012 quasi flat · Cours zone basse Fibo 23,6-38,2% · Range post-spike · Bollinger en compression (breakout potentiel) · Volumes faibles · Pas d'alignement haussier net des MMs mais stabilisation au-dessus du support 0,30€ depuis plusieurs semaines</div>
+  </div>
+
+  <div class="score-row">
+    <div><div class="score-name">📊 Fondamentaux</div><div style="font-size:12px;color:var(--muted)">Pondération 25%</div></div>
+    <div><div class="score-bar-w"><div class="score-bar" style="width:70%"></div></div></div>
+    <div class="score-val">7,0 / 10</div>
+    <div class="score-sub">Sanofi 13,9% = validation scientifique externe de 1er ordre (+) · Fred Chereau ex-Alexion/AstraZeneca Rare Disease (profil idéal) (+) · Institut Pasteur co-développement SENS-601 GJB2 (+) · Tréso 57M€ confortable vs pairs (+) · GJB2 = ~50% surdités congénitales = marché immense (+) · Cochlear Limited partenaire SENS-401 (+) · Données SENS-501 6m positives (+) · Zéro revenu commercial (-) · Pertes 22M€/an (-) · Runway 12 mois (-)</div>
+  </div>
+
+  <div class="score-row">
+    <div><div class="score-name">⚡ Catalyseurs</div><div style="font-size:12px;color:var(--muted)">Pondération 20%</div></div>
+    <div><div class="score-bar-w"><div class="score-bar" style="width:75%"></div></div></div>
+    <div class="score-val">7,5 / 10</div>
+    <div class="score-sub">Données SENS-501 12 mois Q4 2026 (BINAIRE MAJEUR) · CTA SENS-601 imminente (S1 2026) · Fred Chereau prise de fonctions 1er juin (regain de confiance potentiel) · Réseau Alexion/AstraZeneca → partenariats SENS-601 · ASGCT données précliniques positives (passé) · Résultats semestriels S1 2026 (été 2026)</div>
+  </div>
+
+  <div class="score-row">
+    <div><div class="score-name">🔬 Consensus</div><div style="font-size:12px;color:var(--muted)">Pondération 15%</div></div>
+    <div><div class="score-bar-w"><div class="score-bar" style="width:45%"></div></div></div>
+    <div class="score-val">4,5 / 10</div>
+    <div class="score-sub">1 seul analyste visible (Boursorama) · Objectif 1,64€ ambitieux (au-delà ATH graphique 1,053€) · Nom analyste non identifiable en sources gratuites · Couverture insuffisante pour consensus fiable · Possible biais (placement agents AK historiques)</div>
+  </div>
+
+  <div class="score-row">
+    <div><div class="score-name">🛡️ Risques</div><div style="font-size:12px;color:var(--muted)">Pondération 15%</div></div>
+    <div><div class="score-bar-w"><div class="score-bar" style="width:45%"></div></div></div>
+    <div class="score-val">4,5 / 10</div>
+    <div class="score-sub">Lock-up ~28/07/2026 (pression vendeuse majeure) (-) · Runway S1 2027 = AK probable (-) · Dilution historique 71% (-) · Concurrent Regeneron sur SENS-501 US (-) · CMO en départ (-) · Mais : Fred Chereau résout risque gouvernance (+) · Sanofi présent = anchor institutionnel anti-panique (+) · Prix AK 0,28€ = plancher de référence (+)</div>
+  </div>
+
+  <div style="margin-top:24px;background:rgba(251,146,60,.07);border:1px solid rgba(251,146,60,.22);border-radius:12px;padding:18px 22px;display:flex;align-items:center;gap:16px;">
+    <span style="font-size:36px">⭐</span>
+    <div>
+      <div style="color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">Score global pondéré</div>
+      <div style="font-family:'DM Mono',monospace;font-size:32px;font-weight:700;color:var(--orange)">5,8 / 10</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:4px">= (5,0×0,25) + (7,0×0,25) + (7,5×0,20) + (4,5×0,15) + (4,5×0,15) = 1,25 + 1,75 + 1,50 + 0,675 + 0,675</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CONCLUSION ═══ -->
+<div class="conclu">
+  <h2>💬 Conclusion & Avis personnel</h2>
+  <p style="font-size:14px;color:var(--text);line-height:1.75;margin-bottom:18px;">
+    Sensorion est une valeur de <strong style="color:var(--accent2)">conviction sur le pipeline, pas sur la technique</strong>. La thèse repose entièrement sur la réussite clinique — et les données SENS-501 à 12 mois en Q4 2026 seront le véritable verdict. En attendant, le graphique dit peu de choses : RSI neutre à 51, MACD quasi flat, cours en zone basse du Fibonacci. Pas de signal d'entrée technique clair aujourd'hui.
+  </p>
+  <p style="font-size:14px;color:var(--text);line-height:1.75;margin-bottom:18px;">
+    L'entrée de <strong style="color:var(--green)">Sanofi à 13,9% pour 20 M€</strong> est la donnée la plus importante de l'analyse. Ce n'est pas un investissement financier passif — c'est une validation scientifique par l'un des leaders mondiaux de l'otologie. Cela réduit significativement le risque pipeline sur SENS-501, mais ne résout pas le risque de dilution ni la concurrence de Regeneron.
+  </p>
+  <p style="font-size:14px;color:var(--text);line-height:1.75;margin-bottom:18px;">
+    Le <strong style="color:var(--red)">risque lock-up à ~28/07/2026 est le facteur dominant à court terme</strong>. Les souscripteurs de janvier (Sanofi inclus) sont en plus-value latente de +45% sur leur prix d'entrée à 0,28€. À l'expiration, la tentation de prise de bénéfices sera réelle — même partielle. Ce point mérite d'être intégré dans toute décision d'entrée ou de renforcement avant juillet.
+  </p>
+
+  <div style="background:rgba(192,132,252,.07);border:1px solid rgba(192,132,252,.18);border-radius:10px;padding:16px 18px;margin-bottom:20px;font-size:13.5px;color:var(--text);">
+    <strong style="color:var(--accent2)">Mon avis franc :</strong> Sensorion est un dossier de <em>conviction fondamentale long terme</em> qui se renforce à chaque news structurelle. La nomination de Fred Chereau (ex-Alexion/AstraZeneca Rare Disease) le 1er juin est un signal fort : ce profil ne rejoint pas une biotech sans conviction sur le pipeline. Combiné à Sanofi à 13,9% et l'Institut Pasteur comme co-développeur sur GJB2, les "smart money" sont alignés. Le cours actuel à 0,405€ intègre peu de ces atouts structurels — le marché attend les données cliniques pour reprendre. La vraie décision se prendra autour de deux moments clés : <strong>l'expiration du lock-up juillet 2026</strong> (opportunité d'entrée si absorption correcte) et <strong>les données SENS-501 à 12 mois Q4 2026</strong> (catalyseur binaire). Stop mental conseillé à 0,28€ (= prix AK institutionnels = plancher de référence logique).
+  </div>
+
+  <div class="pros-cons">
+    <div class="pros">
+      <h4>✅ Arguments haussiers MT/LT</h4>
+      <ul>
+        <li>Fred Chereau (ex-Alexion/AstraZeneca RD) — DG idéal phase commerciale</li>
+        <li>Sanofi 13,9% = validation scientifique de premier ordre</li>
+        <li>Institut Pasteur co-développement SENS-601 (GJB2)</li>
+        <li>GJB2 = ~50% de toutes les surdités congénitales</li>
+        <li>Pipeline triple : SENS-501 + SENS-601 + SENS-401</li>
+        <li>Données 6 mois Coh.2 SENS-501 positives (maintien gains)</li>
+        <li>Cochlear Limited partenaire SENS-401</li>
+        <li>Tréso 57M€ — bien au-dessus de ses pairs cotés</li>
+        <li>Cours +45% au-dessus du prix AK institutionnels (0,28€)</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>❌ Arguments baissiers CT</h4>
+      <ul>
+        <li>Lock-up ~28/07 — pression vendeuse majeure imminente</li>
+        <li>Runway S1 2027 = AK supplémentaire probable</li>
+        <li>Dilution historique (+71% en jan 2026)</li>
+        <li>RSI neutre, MACD flat — pas de signal CT clair</li>
+        <li>Regeneron FDA : concurrent sur le marché US SENS-501</li>
+        <li>CMO Géraldine Honnet aussi en départ</li>
+        <li>1 analyste visible — objectif 1,64€ ambitieux</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-size:14px;color:var(--accent2);margin-bottom:14px;font-weight:600;">📌 Niveaux techniques clés</h3>
+  <div class="levels-grid">
+    <div class="level-card supp">
+      <div class="lc-label">Support 1</div>
+      <div class="lc-val">0,370€</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Fibo 23,6% — Support fragile</div>
+    </div>
+    <div class="level-card supp">
+      <div class="lc-label">Support 2</div>
+      <div class="lc-val">0,300€</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Support vert chart — Plancher range</div>
+    </div>
+    <div class="level-card supp">
+      <div class="lc-label">Stop mental</div>
+      <div class="lc-val">0,280€</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Prix AK jan 2026 — plancher institutionnel</div>
+    </div>
+    <div class="level-card res">
+      <div class="lc-label">Résistance 1</div>
+      <div class="lc-val">0,501€</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Fibo 38,2% — Plafond CT</div>
+    </div>
+    <div class="level-card res">
+      <div class="lc-label">Résistance 2</div>
+      <div class="lc-val">0,606€</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Fibo 50% — Cible MT scénario bull</div>
+    </div>
+    <div class="level-card res">
+      <div class="lc-label">Résistance rouge</div>
+      <div class="lc-val">0,712€</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Fibo 61,8% — Zone rouge chart</div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;background:var(--surface2);border-radius:10px;padding:16px 18px;">
+    <h4 style="font-size:13px;color:var(--orange);margin-bottom:10px;font-weight:600;">⚡ Catalyseurs datés à surveiller</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;">
+      <div>📅 <strong style="color:var(--text)">Imminent — S1 2026</strong> — Annonce soumission CTA/IND SENS-601 (GJB2-GT)</div>
+      <div>📅 <strong style="color:var(--text)">~28 juillet 2026</strong> — Expiration lock-up AK jan 2026 ⚠️ VIGILANCE</div>
+      <div>📅 <strong style="color:var(--text)">Été 2026</strong> — Publication trésorerie S1 2026 (vérification burn rate)</div>
+      <div>📅 <strong style="color:var(--text)">Q4 2026</strong> — Données SENS-501 Cohorte 2 à 12 mois 🔑 BINAIRE</div>
+      <div>📅 <strong style="color:var(--text)">Fin 2026</strong> — Recrutement Cohorte 1 SENS-601 (post-CTA)</div>
+      <div>📅 <strong style="color:var(--text)">2027</strong> — Résultats intermédiaires Phase 1/2 SENS-601</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <strong>Sources vérifiées :</strong>
+  BusinessWire (communiqués officiels Sensorion 2025-2026) · prospectus AK janvier 2026 (514 946 940 actions post-émission confirmé) ·
+  CompaniesMarketCap (trésorerie ~57 M€ estimée) · Boursorama (cours, consensus 1 analyste, objectif 1,64€) ·
+  Zonebourse / FinanzWire (résultats annuels 2025 publiés 18/03/2026, données SENS-501 6 mois 23/03/2026) ·
+  BusinessWire 12/05/2026 (résultats AG Mixte — toutes résolutions adoptées) ·
+  BusinessWire 05/05/2026 (participation ASGCT 11-15 mai Boston, 2 posters SENS-601 préclinique) ·
+  Investisseurs-Heureux.fr (cash burn ~22 M€/an, analyse fondamentale) ·
+  ProRealTime (graphique 1S, captures 25/05/2026 17h19)<br><br>
+
+  <strong>⚠️ Disclaimer NPC complet :</strong>
+  Analyse rédigée par un investisseur particulier non professionnel (NPC) à titre strictement informatif et personnel. Elle ne constitue en aucun cas un conseil en investissement, une recommandation d'achat ou de vente, ni une sollicitation. Les données financières sont issues de sources publiques et peuvent comporter des erreurs. Les performances passées ne préjugent pas des performances futures. Tout investissement comporte un risque de perte en capital, pouvant être total dans le cas des micro-capitalisations et des biotechs en phase clinique. Avant tout investissement, consultez un conseiller financier agréé.<br><br>
+
+  <em>Analyse générée le 25/05/2026 à 17h19 · PROMPT MASTER V6 · Format Forum Boursorama</em>
+</footer>
+
+
+<!-- ═══ LIVRAISON ═══ -->
+<div class="livraison">
+  <div class="lv-title">🚀 Livraison — Liens de publication</div>
+
+  <div class="lv-block">
+    <div class="lv-label">📁 REPO GITHUB — créer Public sans README, uploader le fichier à la racine</div>
+    <div class="lv-row">
+      <code id="lnk-repo" class="lv-code">https://github.com/ventegarchy-beep/ventegarchy-beep-ALSEN-Analyse-25052026</code>
+      <button class="lv-btn purple" id="btn-r" onclick="navigator.clipboard.writeText(document.getElementById('lnk-repo').innerText);document.getElementById('btn-r').textContent='✅ Copié';setTimeout(()=>document.getElementById('btn-r').textContent='📋 Copier',2200)">📋 Copier</button>
+    </div>
+  </div>
+
+  <div class="lv-block" style="border-top:1px solid var(--border);padding-top:14px;">
+    <div class="lv-label">🌐 LIEN HTML — à coller sur le forum Boursorama (~2 min après le push)</div>
+    <div class="lv-row">
+      <code id="lnk-html" class="lv-code green">https://raw.githack.com/ventegarchy-beep/ventegarchy-beep-ALSEN-Analyse-25052026/main/ALSEN_Analyse_Forum_25052026.html</code>
+      <button class="lv-btn greenbtn" id="btn-h" onclick="navigator.clipboard.writeText(document.getElementById('lnk-html').innerText);document.getElementById('btn-h').textContent='✅ Copié';setTimeout(()=>document.getElementById('btn-h').textContent='📋 Copier',2200)">📋 Copier</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /.wrap -->
+</body>
+</html>
